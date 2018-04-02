@@ -179,6 +179,23 @@ public extension Morphable where Self: UILabel {
         tintColor = label.tintColor
     }
     
+    public func copyNonDefaultProperties(from view: UIView) {
+        guard let label = view as? UILabel
+            else { return }
+        if label.attributedText != nil {
+            attributedText = label.attributedText
+        }
+        if label.adjustsFontSizeToFitWidth != false {
+            adjustsFontSizeToFitWidth = label.adjustsFontSizeToFitWidth
+        }
+        if label.minimumScaleFactor != 0.0 {
+            minimumScaleFactor = label.minimumScaleFactor
+        }
+        if label.numberOfLines != 1 {
+            numberOfLines = label.numberOfLines
+        }
+    }
+    
 }
 
 public extension Morphable where Self: UIImageView {

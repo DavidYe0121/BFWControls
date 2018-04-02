@@ -115,19 +115,18 @@ open class NibTableViewCell: UITableViewCell {
     private var isAwake = false
     
     private func commonAwake() {
-        guard let cellView = cellView
-            else { return }
-        cellView.textLabel?.attributedText = super.textLabel?.attributedText
-        cellView.detailTextLabel?.attributedText = super.detailTextLabel?.attributedText
-        super.textLabel?.attributedText = nil
-        super.detailTextLabel?.attributedText = nil
+        cellView?.textLabel?.copyNonDefaultProperties(from: super.textLabel!)
+        super.textLabel!.attributedText = nil
+        cellView?.detailTextLabel?.copyNonDefaultProperties(from: super.detailTextLabel!)
+        super.detailTextLabel!.attributedText = nil
         isAwake = true
     }
     
     // MARK: - UITableViewCell
     
     open override var textLabel: UILabel? {
-        return isAwake
+        return true
+//        return isAwake
             ? cellView?.textLabel
             : super.textLabel
     }
